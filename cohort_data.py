@@ -1,63 +1,41 @@
-"""Functions to parse a file containing student data."""
-
-
-def all_houses(filename):
-    """Return a set of all house names in the given file.
-
-    For example:
-      >>> unique_houses('cohort_data.txt')
-      {"Dumbledore's Army", 'Gryffindor', ..., 'Slytherin'}
-
-    Arguments:
-      - filename (str): the path to a data file
-
-    Return:
-      - set[str]: a set of strings
-    """
-
+def get_housees():
+    
     houses = set()
 
-    # TODO: replace this with your code
+    cohort_data = open("cohort_data.txt")
+
+    for line in cohort_data:
+        house = line.rstrip().split('|')[2]
+        if house:
+            houses.add(house)
 
     return houses
 
 
-def students_by_cohort(filename, cohort='All'):
-    """Return a list of students' full names by cohort.
+def students_by_cohort("cohort_data.txt", cohort='All'):
 
-    Names are sorted in alphabetical order. If a cohort isn't
-    given, return a list of all students. For example:
-      >>> students_by_cohort('cohort_data.txt')
-      ['Adrian Pucey', 'Alicia Spinnet', ..., 'Zacharias Smith']
+#    Arguments:
+ #     - filename (str): the path to a data file
+ #     - cohort (str): optional, the name of a cohort
 
-      >>> students_by_cohort('cohort_data.txt', cohort='Fall 2015')
-      ['Angelina Johnson', 'Cho Chang', ..., 'Terence Higgs', 'Theodore Nott']
-
-      >>> students_by_cohort('cohort_data.txt', cohort='Winter 2016')
-      ['Adrian Pucey', 'Andrew Kirke', ..., 'Roger Davies', 'Susan Bones']
-
-      >>> students_by_cohort('cohort_data.txt', cohort='Spring 2016')
-      ['Cormac McLaggen', 'Demelza Robins', ..., 'Zacharias Smith']
-
-      >>> students_by_cohort('cohort_data.txt', cohort='Summer 2016')
-      ['Alicia Spinnet', 'Dean Thomas', ..., 'Terry Boot', 'Vincent Crabbe']
-
-    Arguments:
-      - filename (str): the path to a data file
-      - cohort (str): optional, the name of a cohort
-
-    Return:
-      - list[list]: a list of lists
-    """
-
+ #   Return:
+  #    - list[list]: a list of lists
+    
     students = []
 
-    # TODO: replace this with your code
+    cohort_data = open("cohort_data.txt")
+
+    for line in cohort_data:
+        first, last, _, _, cohort_name = line.rstrip().split('|')
+
+        if cohort_name not in ('I', 'G') and cohort in ('All', cohort_name):
+            students.append(f'{first} {last}')
 
     return sorted(students)
 
 
-def all_names_by_house(filename):
+def all_names_by_house():
+
     """Return a list that contains rosters for all houses, ghosts, instructors.
 
     Rosters appear in this order:
@@ -127,7 +105,7 @@ def all_data(filename):
     return all_data
 
 
-def get_cohort_for(filename, name):
+def get_cohort_for("cohort_data.txt", name):
     """Given someone's name, return the cohort they belong to.
 
     Return None if the person doesn't exist. For example:
@@ -151,7 +129,7 @@ def get_cohort_for(filename, name):
     # TODO: replace this with your code
 
 
-def find_duped_last_names(filename):
+def find_duped_last_names("cohort_data.txt"):
     """Return a set of duplicated last names that exist in the data.
 
     For example:
@@ -168,7 +146,7 @@ def find_duped_last_names(filename):
     # TODO: replace this with your code
 
 
-def get_housemates_for(filename, name):
+def get_housemates_for("cohort_data.txt", name):
     """Return a set of housemates for the given student.
 
     Given a student's name, return a list of their housemates. Housemates are
@@ -183,9 +161,7 @@ def get_housemates_for(filename, name):
     # TODO: replace this with your code
 
 
-##############################################################################
-# END OF MAIN EXERCISE.  Yay!  You did it! You Rock!
-#
+###################  DOCTEST   #########################
 
 if __name__ == '__main__':
     import doctest
