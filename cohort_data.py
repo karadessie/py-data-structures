@@ -16,7 +16,7 @@ def get_houses():
 
 def get_name():
 
-    name = input("\nWhat is the person's first and last name?")
+    name = input("\nWhat is the person's first and last name? ")
 
     return name
 
@@ -93,7 +93,7 @@ def all_data():
 
 def get_cohort_for():
 
-    name = input("\nWhat is the person's first and last name?")
+    name = input("\nWhat is the person's first and last name? ")
     
     for full_name, _, _, cohort_name in all_data():
         if full_name == name:
